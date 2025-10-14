@@ -239,6 +239,15 @@ view: models {
     html:
     {% if value contains "gs://" %}
     <a href="https://console.cloud.google.com/storage/browser/{{value | remove_first: "gs://"}}">{{rendered_value}}</a>
+    {% elsif value contains "bq://" %}
+    {% assign bq_shorthand = value | remove_first: "bq://" %}
+    {% assign project_id_with_dataset = bq_shorthand | split: ':' %}
+    {% assign project_id = project_id_with_dataset[0] %}
+    {% assign dataset_and_table = project_id_with_dataset[1] | split: '.' %}
+    {% assign dataset_id = dataset_and_table[0] %}
+    {% assign table_id = dataset_and_table[1] %}
+    {% assign console_url = 'https://console.cloud.google.com/bigquery?project=' | append: project_id | append: '&ws=!1m5!1m4!4m3!1s' | append: project_id | append: '!2s' | append: dataset_id | append: '!3s' | append: table_id %}
+    <a href="{{console_url}}">{{rendered_value}}</a>
     {% else %}
     <a href="{{value}}">{{rendered_value}}</a>
     {% endif %};;
