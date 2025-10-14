@@ -236,6 +236,12 @@ view: models {
   dimension: training_data_uri {
     type: string
     sql: ${TABLE}."training_data_uri" ;;
+    html:
+    {% if value contains "gs://" %}
+    <a href="https://console.cloud.google.com/storage/browser/{{value | remove_first: "gs://"}}">{{rendered_value}}</a>
+    {% else %}
+    <a href="{{value}}">{{rendered_value}}</a>
+    {% endif %};;
   }
 
   dimension: use_case {
