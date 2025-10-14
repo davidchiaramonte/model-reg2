@@ -4,7 +4,7 @@
   layout: newspaper
   preferred_viewer: dashboards-next
   description: ''
-  preferred_slug: XNqfOmL2qpfasGxbfgBZvg
+  preferred_slug: DBrSkJUSdjcZ75GNCQQpr3
   elements:
   - title: Example Deep Dive Dashboard
     name: Example Deep Dive Dashboard
@@ -46,7 +46,6 @@
   - name: ''
     type: text
     title_text: ''
-    subtitle_text: ''
     body_text: '[{"type":"h1","children":[{"text":"Model 1 Information"}],"align":"center"}]'
     rich_content_json: '{"format":"slate"}'
     row: 2
@@ -405,7 +404,6 @@
       most_recent_update.model_name: ''
       most_recent_update.training_data_uri: ''
       most_recent_update.model_status: ''
-      models.creation_timestamp_date: 30 days
     sorts: [models.dynamic_timeframe desc]
     limit: 500
     column_limit: 50
@@ -478,7 +476,6 @@
       most_recent_update.model_name: ''
       most_recent_update.training_data_uri: ''
       most_recent_update.model_status: ''
-      models.creation_timestamp_date: 30 days
     sorts: [models.dynamic_timeframe desc]
     limit: 500
     column_limit: 50
@@ -551,7 +548,6 @@
       most_recent_update.model_name: ''
       most_recent_update.training_data_uri: ''
       most_recent_update.model_status: ''
-      models.creation_timestamp_date: 30 days
     sorts: [models.dynamic_timeframe desc]
     limit: 500
     column_limit: 50
@@ -799,7 +795,6 @@
   - name: " (2)"
     type: text
     title_text: ''
-    subtitle_text: ''
     body_text: '[{"type":"h1","children":[{"text":"Model 1 History"}],"align":"center"}]'
     rich_content_json: '{"format":"slate"}'
     row: 18
@@ -809,7 +804,6 @@
   - name: " (3)"
     type: text
     title_text: ''
-    subtitle_text: ''
     body_text: '[{"type":"h1","children":[{"text":"Model 2 Information"}],"align":"center"}]'
     rich_content_json: '{"format":"slate"}'
     row: 2
@@ -1137,7 +1131,6 @@
       most_recent_update.model_name: ''
       most_recent_update.training_data_uri: ''
       most_recent_update.model_status: ''
-      models.creation_timestamp_date: 30 days
     sorts: [models.dynamic_timeframe desc]
     limit: 500
     column_limit: 50
@@ -1371,7 +1364,6 @@
       most_recent_update.model_name: ''
       most_recent_update.training_data_uri: ''
       most_recent_update.model_status: ''
-      models.creation_timestamp_date: 30 days
     sorts: [models.dynamic_timeframe desc]
     limit: 500
     column_limit: 50
@@ -1444,7 +1436,6 @@
       most_recent_update.model_name: ''
       most_recent_update.training_data_uri: ''
       most_recent_update.model_status: ''
-      models.creation_timestamp_date: 30 days
     sorts: [models.dynamic_timeframe desc]
     limit: 500
     column_limit: 50
@@ -1508,7 +1499,6 @@
   - name: " (Copy)"
     type: text
     title_text: " (Copy)"
-    subtitle_text: ''
     body_text: '[{"type":"h1","children":[{"text":"Model 2 History"}],"align":"center"}]'
     rich_content_json: '{"format":"slate"}'
     row: 18
@@ -1609,7 +1599,6 @@
   - name: " (4)"
     type: text
     title_text: ''
-    subtitle_text: ''
     body_text: |-
       <div style="border-bottom: solid 1px #4285F4;">
       <nav style="font-size: 15px; padding: 5px 10px 0 10px; height: 60px">
@@ -1623,6 +1612,174 @@
     col: 0
     width: 24
     height: 2
+  - title: Shadow Deployments
+    name: Shadow Deployments
+    model: hca_ai_platform
+    explore: models
+    type: looker_grid
+    fields: [most_recent_update.model_name, most_recent_update.model_gcp_project_id,
+      most_recent_update.shadow_deployment_status, most_recent_update.performance_metrics_summary]
+    filters:
+      most_recent_update.shadow_deployment_status: "-NULL"
+      models.model_gcp_project_id: ''
+      most_recent_update.model_name: ''
+      models.domain: ''
+      most_recent_update.training_data_uri: ''
+      most_recent_update.model_status: ''
+    sorts: [most_recent_update.model_name]
+    limit: 500
+    column_limit: 50
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    hidden_pivots: {}
+    defaults_version: 1
+    listen:
+      Model 1 GCP Project: models.model_gcp_project_id
+      Model 1 Name: models.model_name
+      Model 1 Semantic Version: models.model_semantic_version
+    row: 32
+    col: 0
+    width: 12
+    height: 6
+  - title: Shadow Deployments
+    name: Shadow Deployments (2)
+    model: hca_ai_platform
+    explore: models
+    type: looker_grid
+    fields: [most_recent_update.model_name, most_recent_update.model_gcp_project_id,
+      most_recent_update.shadow_deployment_status, most_recent_update.performance_metrics_summary]
+    filters:
+      most_recent_update.shadow_deployment_status: "-NULL"
+      models.model_gcp_project_id: ''
+      most_recent_update.model_name: ''
+      models.domain: ''
+      most_recent_update.training_data_uri: ''
+      most_recent_update.model_status: ''
+    sorts: [most_recent_update.model_name]
+    limit: 500
+    column_limit: 50
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    hidden_pivots: {}
+    defaults_version: 1
+    listen:
+      Model 2 GCP Project: models.model_gcp_project_id
+      Model 2 Name: models.model_name
+      Model 2 Semantic Version: models.model_semantic_version
+    row: 32
+    col: 12
+    width: 12
+    height: 6
+  - title: Production Deployments
+    name: Production Deployments
+    model: hca_ai_platform
+    explore: models
+    type: looker_grid
+    fields: [most_recent_update.model_name, most_recent_update.model_gcp_project_id,
+      most_recent_update.model_semantic_version, most_recent_update.performance_metrics_summary]
+    filters:
+      most_recent_update.promotion_status: production
+      models.model_gcp_project_id: ''
+      most_recent_update.model_name: ''
+      models.domain: ''
+      most_recent_update.training_data_uri: ''
+      most_recent_update.model_status: ''
+    sorts: [most_recent_update.model_name]
+    limit: 500
+    column_limit: 50
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    hidden_pivots: {}
+    defaults_version: 1
+    listen:
+      Model 1 GCP Project: models.model_gcp_project_id
+      Model 1 Name: models.model_name
+      Model 1 Semantic Version: models.model_semantic_version
+    row: 26
+    col: 0
+    width: 12
+    height: 6
+  - title: Production Deployments
+    name: Production Deployments (2)
+    model: hca_ai_platform
+    explore: models
+    type: looker_grid
+    fields: [most_recent_update.model_name, most_recent_update.model_gcp_project_id,
+      most_recent_update.model_semantic_version, most_recent_update.performance_metrics_summary]
+    filters:
+      most_recent_update.promotion_status: production
+      models.model_gcp_project_id: ''
+      most_recent_update.model_name: ''
+      models.domain: ''
+      most_recent_update.training_data_uri: ''
+      most_recent_update.model_status: ''
+    sorts: [most_recent_update.model_name]
+    limit: 500
+    column_limit: 50
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    hidden_pivots: {}
+    defaults_version: 1
+    listen:
+      Model 2 GCP Project: models.model_gcp_project_id
+      Model 2 Name: models.model_name
+      Model 2 Semantic Version: models.model_semantic_version
+    row: 26
+    col: 12
+    width: 12
+    height: 6
   filters:
   - name: Model 1 GCP Project
     title: Model 1 GCP Project
@@ -1661,7 +1818,7 @@
       display: popover
     model: hca_ai_platform
     explore: models
-    listens_to_filters: [Model 1 GCP Project, Model 1 Name]
+    listens_to_filters: [Model 1 Name]
     field: models.model_semantic_version
   - name: Model 2 GCP Project
     title: Model 2 GCP Project
@@ -1700,5 +1857,5 @@
       display: popover
     model: hca_ai_platform
     explore: models
-    listens_to_filters: [Model 2 GCP Project, Model 2 Name]
+    listens_to_filters: [Model 2 Name]
     field: models.model_semantic_version

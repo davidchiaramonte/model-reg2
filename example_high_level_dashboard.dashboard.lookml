@@ -4,7 +4,7 @@
   layout: newspaper
   preferred_viewer: dashboards-next
   description: ''
-  preferred_slug: A1oNz0eJb57VEhGdz0WyFU
+  preferred_slug: RtAzxmlGDePp2edRwaipD6
   elements:
   - title: Average Recall
     name: Average Recall
@@ -369,7 +369,6 @@
   - name: ''
     type: text
     title_text: ''
-    subtitle_text: ''
     body_text: '[{"type":"h1","children":[{"text":"High Level Metrics"}],"align":"center"}]'
     rich_content_json: '{"format":"slate"}'
     row: 2
@@ -639,7 +638,6 @@
     fields: [models.dynamic_timeframe, models.average_accuracy, models.average_f1,
       models.average_log_loss, models.average_mae, models.average_precision, models.average_r_squared,
       models.average_recall, models.average_rmse]
-    filters: {}
     sorts: [models.dynamic_timeframe]
     limit: 500
     column_limit: 50
@@ -695,7 +693,6 @@
   - name: " (2)"
     type: text
     title_text: ''
-    subtitle_text: ''
     body_text: '[{"type":"h1","children":[{"text":"Production Models"}],"align":"center"}]'
     rich_content_json: '{"format":"slate"}'
     row: 25
@@ -747,7 +744,6 @@
   - name: " (3)"
     type: text
     title_text: ''
-    subtitle_text: ''
     body_text: '[{"type":"h1","children":[{"text":"Shadow Models"}],"align":"center"}]'
     rich_content_json: '{"format":"slate"}'
     row: 32
@@ -798,7 +794,6 @@
   - name: " (4)"
     type: text
     title_text: ''
-    subtitle_text: ''
     body_text: '[{"type":"h1","children":[{"text":"Other Info"}],"align":"center"}]'
     rich_content_json: '{"format":"slate"}'
     row: 39
@@ -872,15 +867,14 @@
     col: 12
     width: 12
     height: 8
-  - title: Models Containing PII
-    name: Models Containing PII
+  - title: Models Containing Sensitive Information
+    name: Models Containing Sensitive Information
     model: hca_ai_platform
     explore: models
     type: looker_column
     fields: [models.dynamic_timeframe, models.count, models.is_sensitive_data]
     pivots: [models.is_sensitive_data]
     fill_fields: [models.is_sensitive_data]
-    filters: {}
     sorts: [models.is_sensitive_data, models.dynamic_timeframe]
     limit: 500
     column_limit: 50
@@ -940,7 +934,6 @@
   - name: " (5)"
     type: text
     title_text: ''
-    subtitle_text: ''
     body_text: |-
       <div style="border-bottom: solid 1px #4285F4;">
       <nav style="font-size: 15px; padding: 5px 10px 0 10px; height: 60px">
