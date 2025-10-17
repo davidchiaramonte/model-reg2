@@ -43,6 +43,24 @@ view: models {
     }
   }
 
+  parameter: model_metric_selector {
+    label: "Model Algorithm Type"
+    type: unquoted
+    default_value: "classification"
+    allowed_value: {
+      label: "Linear Regression"
+      value: "linear_regression"
+    }
+    allowed_value: {
+      label: "Classification"
+      value: "classification"
+    }
+    # allowed_value: {
+    #   label: "Logistic Regression"
+    #   value: "logistic_regression"
+    # }
+  }
+
   dimension: dynamic_timeframe {
     type: string
     label_from_parameter: timeframe_selector
@@ -183,6 +201,12 @@ view: models {
     label: "Mean Absolute Error"
   }
 
+  dimension: mse {
+    type: number
+    sql: ${performance_metrics_summary} ->> 'mse' ;;
+    label: "Mean Squared Error"
+  }
+
   dimension: rmse {
     type: number
     sql: ${performance_metrics_summary} ->> 'rmse' ;;
@@ -201,12 +225,151 @@ view: models {
     label: "F1 Score"
   }
 
+  dimension: roc_auc {
+    type: number
+    sql: ${performance_metrics_summary} ->> 'roc_auc' ;;
+    label: "ROC AUC"
+  }
+
   dimension: log_loss {
     type: number
     sql: ${performance_metrics_summary} ->> 'log_loss' ;;
   }
 
   #========================================================================
+
+  # Dynamic Metrics
+  #
+  # If more model types want to be added, developers can add extra conditions to SQL clauses that follow the format below and replacing the text within the <> notation:
+  #
+  # {% elsif model_metric_selector._parameter_value == "<algorithm_here>" %}
+  #  ${<some_metric_name_here>}
+  #
+  # *BUT MAKE SURE TO ADD NEW ALGORITHMS TO THE PARAMETER ON LINE 46 ABOVE, FIRST!*
+
+  measure: dynamic_1 {
+    type: average
+    sql: {% if model_metric_selector._parameter_value == "linear_regression" %}
+          ${mse}::FLOAT
+         {% elsif model_metric_selector._parameter_value == "classification" %}
+          ${accuracy}::FLOAT
+         {% else %}
+          null
+         {% endif %};;
+    value_format_name: decimal_2
+    html: {% if model_metric_selector._parameter_value == "linear_regression" %}
+          <a href={{link}}>{{rendered_value}}<br>Avg MSE</a>
+          {% elsif model_metric_selector._parameter_value == "classification" %}
+          <a href={{link}}>{{rendered_value}}<br>Avg Accuracy</a>
+          {% else %}
+          {{rendered_value}}
+          {% endif %}
+          ;;
+    drill_fields: [model_name,model_gcp_project_id,performance_metrics_summary]
+  }
+  measure: dynamic_2 {
+    type: average
+    sql: {% if model_metric_selector._parameter_value == "linear_regression" %}
+          ${rmse}::FLOAT
+         {% elsif model_metric_selector._parameter_value == "classification" %}
+          ${precision}::FLOAT
+         {% else %}
+          null
+         {% endif %};;
+    value_format_name: decimal_2
+    html: {% if model_metric_selector._parameter_value == "linear_regression" %}
+          <a href={{link}}>{{rendered_value}}<br>Avg RMSE</a>
+          {% elsif model_metric_selector._parameter_value == "classification" %}
+          <a href={{link}}>{{rendered_value}}<br>Avg Precision</a>
+          {% else %}
+          {{rendered_value}}
+          {% endif %}
+          ;;
+    drill_fields: [model_name,model_gcp_project_id,performance_metrics_summary]
+  }
+  measure: dynamic_3 {
+    type: average
+    sql: {% if model_metric_selector._parameter_value == "linear_regression" %}
+          ${mae}::FLOAT
+         {% elsif model_metric_selector._parameter_value == "classification" %}
+          ${recall}::FLOAT
+         {% else %}
+          null
+         {% endif %};;
+    value_format_name: decimal_2
+    html: {% if model_metric_selector._parameter_value == "linear_regression" %}
+          <a href={{link}}>{{rendered_value}}<br>Avg MAE</a>
+          {% elsif model_metric_selector._parameter_value == "classification" %}
+          <a href={{link}}>{{rendered_value}}<br>Avg Recall</a>
+          {% else %}
+          {{rendered_value}}
+          {% endif %}
+          ;;
+    drill_fields: [model_name,model_gcp_project_id,performance_metrics_summary]
+  }
+  measure: dynamic_4 {
+    type: average
+    sql: {% if model_metric_selector._parameter_value == "linear_regression" %}
+          ${r_squared}::FLOAT
+         {% elsif model_metric_selector._parameter_value == "classification" %}
+          ${f1_score}::FLOAT
+         {% else %}
+          null
+         {% endif %};;
+    value_format_name: decimal_2
+    html: {% if model_metric_selector._parameter_value == "linear_regression" %}
+          <a href={{link}}>{{rendered_value}}<br>Avg R-Squared</a>
+          {% elsif model_metric_selector._parameter_value == "classification" %}
+          <a href={{link}}>{{rendered_value}}<br>Avg F1 Score</a>
+          {% else %}
+          {{rendered_value}}
+          {% endif %}
+          ;;
+    drill_fields: [model_name,model_gcp_project_id,performance_metrics_summary]
+  }
+  measure: dynamic_5 {
+    type: average
+    sql: {% if model_metric_selector._parameter_value == "linear_regression" %}
+          0
+         {% elsif model_metric_selector._parameter_value == "classification" %}
+          ${roc_auc}::FLOAT
+         {% else %}
+          null
+         {% endif %};;
+    value_format_name: decimal_2
+    html: {% if model_metric_selector._parameter_value == "linear_regression" %}
+
+          {% elsif model_metric_selector._parameter_value == "classification" %}
+          <a href={{link}}>{{rendered_value}}<br>Avg ROC AUC</a>
+          {% else %}
+          {{rendered_value}}
+          {% endif %}
+          ;;
+    drill_fields: [model_name,model_gcp_project_id,performance_metrics_summary]
+  }
+  measure: dynamic_6 {
+    type: average
+    sql: {% if model_metric_selector._parameter_value == "linear_regression" %}
+          0
+         {% elsif model_metric_selector._parameter_value == "classification" %}
+          ${log_loss}::FLOAT
+         {% else %}
+          null
+         {% endif %};;
+    value_format_name: decimal_2
+    html: {% if model_metric_selector._parameter_value == "linear_regression" %}
+
+          {% elsif model_metric_selector._parameter_value == "classification" %}
+          <a href={{link}}>{{rendered_value}}<br>Avg Log Loss</a>
+          {% else %}
+          {{rendered_value}}
+          {% endif %}
+          ;;
+    drill_fields: [model_name,model_gcp_project_id,performance_metrics_summary]
+  }
+
+  #========================================================================
+
 
   dimension: promotion_status {
     type: string
@@ -321,6 +484,13 @@ view: models {
     value_format_name: decimal_2
     drill_fields: [model_name,model_gcp_project_id,performance_metrics_summary]
   }
+  measure: average_mse {
+    type: average
+    sql: ${mse}::FLOAT ;;
+    value_format_name: decimal_2
+    label: "Average Mean Squared Error"
+    drill_fields: [model_name,model_gcp_project_id,performance_metrics_summary]
+  }
   measure: average_rmse {
     type: average
     sql: ${rmse}::FLOAT ;;
@@ -340,6 +510,13 @@ view: models {
     sql: ${f1_score}::FLOAT ;;
     label: "Average F1 Score"
     value_format_name: decimal_2
+    drill_fields: [model_name,model_gcp_project_id,performance_metrics_summary]
+  }
+  measure: average_roc_auc {
+    type: average
+    sql: ${roc_auc}::FLOAT ;;
+    value_format_name: decimal_2
+    label: "Average ROC AUC"
     drill_fields: [model_name,model_gcp_project_id,performance_metrics_summary]
   }
   measure: average_log_loss {
