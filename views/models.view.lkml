@@ -258,9 +258,9 @@ view: models {
          {% endif %};;
     value_format_name: decimal_2
     html: {% if model_metric_selector._parameter_value == "linear_regression" %}
-          <a href={{link}}>{{rendered_value}}<br>Avg MSE</a>
+          <a href={{link}}>{{rendered_value}}<h3>Avg MSE</h3></a>
           {% elsif model_metric_selector._parameter_value == "classification" %}
-          <a href={{link}}>{{rendered_value}}<br>Avg Accuracy</a>
+          <a href={{link}}>{{rendered_value}}<h3>Avg Accuracy</h3></a>
           {% else %}
           {{rendered_value}}
           {% endif %}
@@ -278,9 +278,9 @@ view: models {
          {% endif %};;
     value_format_name: decimal_2
     html: {% if model_metric_selector._parameter_value == "linear_regression" %}
-          <a href={{link}}>{{rendered_value}}<br>Avg RMSE</a>
+          <a href={{link}}>{{rendered_value}}<h3>Avg RMSE</h3></a>
           {% elsif model_metric_selector._parameter_value == "classification" %}
-          <a href={{link}}>{{rendered_value}}<br>Avg Precision</a>
+          <a href={{link}}>{{rendered_value}}<h3>Avg Precision</h3></a>
           {% else %}
           {{rendered_value}}
           {% endif %}
@@ -298,9 +298,9 @@ view: models {
          {% endif %};;
     value_format_name: decimal_2
     html: {% if model_metric_selector._parameter_value == "linear_regression" %}
-          <a href={{link}}>{{rendered_value}}<br>Avg MAE</a>
+          <a href={{link}}>{{rendered_value}}<h3>Avg MAE</h3></a>
           {% elsif model_metric_selector._parameter_value == "classification" %}
-          <a href={{link}}>{{rendered_value}}<br>Avg Recall</a>
+          <a href={{link}}>{{rendered_value}}<h3>Avg Recall</h3></a>
           {% else %}
           {{rendered_value}}
           {% endif %}
@@ -318,9 +318,9 @@ view: models {
          {% endif %};;
     value_format_name: decimal_2
     html: {% if model_metric_selector._parameter_value == "linear_regression" %}
-          <a href={{link}}>{{rendered_value}}<br>Avg R-Squared</a>
+          <a href={{link}}>{{rendered_value}}<h3>Avg R-Squared</h3></a>
           {% elsif model_metric_selector._parameter_value == "classification" %}
-          <a href={{link}}>{{rendered_value}}<br>Avg F1 Score</a>
+          <a href={{link}}>{{rendered_value}}<h3>Avg F1 Score</h3></a>
           {% else %}
           {{rendered_value}}
           {% endif %}
@@ -340,7 +340,7 @@ view: models {
     html: {% if model_metric_selector._parameter_value == "linear_regression" %}
 
           {% elsif model_metric_selector._parameter_value == "classification" %}
-          <a href={{link}}>{{rendered_value}}<br>Avg ROC AUC</a>
+          <a href={{link}}>{{rendered_value}}<h3>Avg ROC AUC</h3></a>
           {% else %}
           {{rendered_value}}
           {% endif %}
@@ -360,7 +360,7 @@ view: models {
     html: {% if model_metric_selector._parameter_value == "linear_regression" %}
 
           {% elsif model_metric_selector._parameter_value == "classification" %}
-          <a href={{link}}>{{rendered_value}}<br>Avg Log Loss</a>
+          <a href={{link}}>{{rendered_value}}<h3>Avg Log Loss</h3></a>
           {% else %}
           {{rendered_value}}
           {% endif %}
