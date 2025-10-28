@@ -86,6 +86,11 @@ view: models {
     sql: ${TABLE}."deployment_environment" ;;
   }
 
+  dimension: deployment_status {
+    type: string
+    sql: ${TABLE}."deployment_status" ;;
+  }
+
   dimension: domain {
     type: string
     sql: ${TABLE}."domain" ;;
@@ -111,6 +116,11 @@ view: models {
     sql: ${TABLE}."git_repo_url" ;;
   }
 
+  dimension: git_branch {
+    type: string
+    sql: ${TABLE}."git_branch" ;;
+  }
+
   dimension: is_primary_deployment {
     type: yesno
     sql: ${TABLE}."is_primary_deployment" ;;
@@ -121,10 +131,10 @@ view: models {
     sql: ${TABLE}."is_sensitive_data" ;;
   }
 
-  dimension_group: last_promoted_timestamp {
+  dimension_group: last_publish_timestamp {
     type: time
     timeframes: [raw, time, date, week, month, quarter, year]
-    sql: ${TABLE}."last_promoted_timestamp" ;;
+    sql: ${TABLE}."last_publish_timestamp" ;;
   }
 
   dimension_group: last_updated_timestamp {
@@ -166,6 +176,16 @@ view: models {
   dimension: model_version_description {
     type: string
     sql: ${TABLE}."model_version_description" ;;
+  }
+
+  dimension: challenger_model_ids {
+    type: string
+    sql: ${TABLE}."challenger_model_ids" ;;
+  }
+
+  dimension: publish_status {
+    type: string
+    sql: ${TABLE}."publish_status" ;;
   }
 
   dimension: path_to_production_projects {
