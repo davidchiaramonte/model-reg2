@@ -94,6 +94,7 @@ view: models {
   dimension: domain {
     type: string
     sql: ${TABLE}."domain" ;;
+    suggest_persist_for: "5 minutes"
   }
 
   dimension: gcs_artifact_path {
@@ -151,6 +152,7 @@ view: models {
   dimension: model_gcp_project_id {
     type: string
     sql: ${TABLE}."model_gcp_project_id" ;;
+    suggest_persist_for: "5 minutes"
   }
 
   dimension: model_labels {
@@ -161,11 +163,13 @@ view: models {
   dimension: model_name {
     type: string
     sql: ${TABLE}."model_name" ;;
+    suggest_persist_for: "5 minutes"
   }
 
   dimension: model_semantic_version {
     type: string
     sql: ${TABLE}."model_semantic_version" ;;
+    suggest_persist_for: "5 minutes"
   }
 
   dimension: model_status {
@@ -419,6 +423,7 @@ view: models {
   dimension: training_data_uri {
     type: string
     sql: ${TABLE}."training_data_uri" ;;
+    suggest_persist_for: "5 minutes"
     html:
     {% if value contains "gs://" %}
     <a href="https://console.cloud.google.com/storage/browser/{{value | remove_first: "gs://"}}">{{rendered_value}}</a>

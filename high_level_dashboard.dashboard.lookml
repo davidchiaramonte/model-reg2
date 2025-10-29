@@ -1,17 +1,17 @@
 ---
-- dashboard: example_high_level_dashboard
-  title: Example High Level Dashboard
+- dashboard: high_level_dashboard
+  title: High Level Dashboard
   layout: newspaper
   preferred_viewer: dashboards-next
   description: ''
-  preferred_slug: RtAzxmlGDePp2edRwaipD6
+  preferred_slug: ym35iMbhoywdcYawllQzjz
   elements:
   - title: Average Recall
     name: Average Recall
     model: hca_ai_platform
     explore: models
     type: single_value
-    fields: [models.dynamic_timeframe, models.average_recall]
+    fields: [models.dynamic_timeframe, models.dynamic_2]
     filters:
       models.average_recall: NOT NULL
     sorts: [models.dynamic_timeframe desc]
@@ -19,15 +19,15 @@
     column_limit: 50
     dynamic_fields:
     - category: table_calculation
-      expression: "${models.average_recall}/offset(${models.average_recall},1)-1"
-      label: Average Recall
+      expression: "${models.dynamic_2}/offset(${models.dynamic_2},1)-1"
+      label: Comparison
       value_format:
       value_format_name: percent_2
       _kind_hint: measure
-      table_calculation: average_recall
+      table_calculation: comparison
       _type_hint: number
     custom_color_enabled: true
-    show_single_value_title: true
+    show_single_value_title: false
     show_comparison: true
     comparison_type: change
     comparison_reverse_colors: false
@@ -36,6 +36,7 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     single_value_title: Avg Recall
+    smart_single_value_size: false
     hidden_pivots: {}
     x_axis_gridlines: false
     y_axis_gridlines: true
@@ -74,32 +75,34 @@
       Training Data URI: most_recent_update.training_data_uri
       Model Status: most_recent_update.model_status
       Model Creation Date: models.creation_timestamp_date
+      Model Algorithm Type: models.model_metric_selector
     row: 4
-    col: 3
-    width: 3
+    col: 4
+    width: 4
     height: 4
   - title: Avg Precision
     name: Avg Precision
     model: hca_ai_platform
     explore: models
     type: single_value
-    fields: [models.dynamic_timeframe, models.average_precision]
+    fields: [models.dynamic_timeframe, models.dynamic_1]
     filters:
       models.average_precision: NOT NULL
+      models.model_metric_selector: classification
     sorts: [models.dynamic_timeframe desc]
     limit: 500
     column_limit: 50
     dynamic_fields:
     - category: table_calculation
-      expression: "${models.average_precision}/offset(${models.average_precision},1)-1"
-      label: Average Recall
+      expression: "${models.dynamic_1}/offset(${models.dynamic_1},1)-1"
+      label: Comparison
       value_format:
       value_format_name: percent_2
       _kind_hint: measure
-      table_calculation: average_recall
+      table_calculation: comparison
       _type_hint: number
     custom_color_enabled: true
-    show_single_value_title: true
+    show_single_value_title: false
     show_comparison: true
     comparison_type: change
     comparison_reverse_colors: false
@@ -107,7 +110,9 @@
     enable_conditional_formatting: false
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
+    custom_color: "#000000"
     single_value_title: Avg Precision
+    smart_single_value_size: false
     hidden_pivots: {}
     x_axis_gridlines: false
     y_axis_gridlines: true
@@ -146,16 +151,17 @@
       Training Data URI: most_recent_update.training_data_uri
       Model Status: most_recent_update.model_status
       Model Creation Date: models.creation_timestamp_date
+      Model Algorithm Type: models.model_metric_selector
     row: 4
     col: 0
-    width: 3
+    width: 4
     height: 4
   - title: Avg Accuracy
     name: Avg Accuracy
     model: hca_ai_platform
     explore: models
     type: single_value
-    fields: [models.dynamic_timeframe, models.average_accuracy]
+    fields: [models.dynamic_timeframe, models.dynamic_3]
     filters:
       models.average_accuracy: NOT NULL
     sorts: [models.dynamic_timeframe desc]
@@ -163,15 +169,15 @@
     column_limit: 50
     dynamic_fields:
     - category: table_calculation
-      expression: "${models.average_accuracy}/offset(${models.average_accuracy},1)-1"
-      label: Percent Change
+      expression: "${models.dynamic_3}/offset(${models.dynamic_3},1)-1"
+      label: Comparison
       value_format:
       value_format_name: percent_2
       _kind_hint: measure
-      table_calculation: percent_change
+      table_calculation: comparison
       _type_hint: number
     custom_color_enabled: true
-    show_single_value_title: true
+    show_single_value_title: false
     show_comparison: true
     comparison_type: change
     comparison_reverse_colors: false
@@ -180,6 +186,7 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     single_value_title: Avg Accuracy
+    smart_single_value_size: false
     hidden_pivots: {}
     x_axis_gridlines: false
     y_axis_gridlines: true
@@ -218,32 +225,31 @@
       Training Data URI: most_recent_update.training_data_uri
       Model Status: most_recent_update.model_status
       Model Creation Date: models.creation_timestamp_date
+      Model Algorithm Type: models.model_metric_selector
     row: 4
-    col: 6
-    width: 3
+    col: 8
+    width: 4
     height: 4
   - title: Avg R Squared
     name: Avg R Squared
     model: hca_ai_platform
     explore: models
     type: single_value
-    fields: [models.dynamic_timeframe, models.average_r_squared]
-    filters:
-      models.average_r_squared: NOT NULL
+    fields: [models.dynamic_timeframe, models.dynamic_5]
     sorts: [models.dynamic_timeframe desc]
     limit: 500
     column_limit: 50
     dynamic_fields:
     - category: table_calculation
-      expression: "${models.average_r_squared}/offset(${models.average_r_squared},1)-1"
-      label: Percent Change
+      expression: "${models.dynamic_5}/offset(${models.dynamic_5},1)-1"
+      label: Comparison
       value_format:
       value_format_name: percent_2
       _kind_hint: measure
-      table_calculation: percent_change
+      table_calculation: comparison
       _type_hint: number
     custom_color_enabled: true
-    show_single_value_title: true
+    show_single_value_title: false
     show_comparison: true
     comparison_type: change
     comparison_reverse_colors: false
@@ -252,6 +258,7 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     single_value_title: Avg R-Squared
+    smart_single_value_size: false
     hidden_pivots: {}
     x_axis_gridlines: false
     y_axis_gridlines: true
@@ -290,16 +297,17 @@
       Training Data URI: most_recent_update.training_data_uri
       Model Status: most_recent_update.model_status
       Model Creation Date: models.creation_timestamp_date
+      Model Algorithm Type: models.model_metric_selector
     row: 4
-    col: 12
-    width: 3
+    col: 16
+    width: 4
     height: 4
   - title: Avg F1 Score
     name: Avg F1 Score
     model: hca_ai_platform
     explore: models
     type: single_value
-    fields: [models.dynamic_timeframe, models.average_f1]
+    fields: [models.dynamic_timeframe, models.dynamic_4]
     filters:
       models.average_f1: NOT NULL
     sorts: [models.dynamic_timeframe desc]
@@ -307,15 +315,15 @@
     column_limit: 50
     dynamic_fields:
     - category: table_calculation
-      expression: "${models.average_f1}/offset(${models.average_f1},1)-1"
-      label: Percent Change
+      expression: "${models.dynamic_4}/offset(${models.dynamic_4},1)-1"
+      label: Comparison
       value_format:
       value_format_name: percent_2
       _kind_hint: measure
-      table_calculation: percent_change
+      table_calculation: comparison
       _type_hint: number
     custom_color_enabled: true
-    show_single_value_title: true
+    show_single_value_title: false
     show_comparison: true
     comparison_type: change
     comparison_reverse_colors: false
@@ -324,6 +332,7 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     single_value_title: Avg F1 Score
+    smart_single_value_size: false
     hidden_pivots: {}
     x_axis_gridlines: false
     y_axis_gridlines: true
@@ -362,9 +371,10 @@
       Training Data URI: most_recent_update.training_data_uri
       Model Status: most_recent_update.model_status
       Model Creation Date: models.creation_timestamp_date
+      Model Algorithm Type: models.model_metric_selector
     row: 4
-    col: 9
-    width: 3
+    col: 12
+    width: 4
     height: 4
   - name: ''
     type: text
@@ -380,7 +390,7 @@
     model: hca_ai_platform
     explore: models
     type: single_value
-    fields: [models.dynamic_timeframe, models.average_log_loss]
+    fields: [models.dynamic_timeframe, models.dynamic_6]
     filters:
       models.average_log_loss: NOT NULL
     sorts: [models.dynamic_timeframe desc]
@@ -388,15 +398,15 @@
     column_limit: 50
     dynamic_fields:
     - category: table_calculation
-      expression: "${models.average_log_loss}/offset(${models.average_log_loss},1)-1"
-      label: Percent Change
+      expression: "${models.dynamic_6}/offset(${models.dynamic_6},1)-1"
+      label: Comparison
       value_format:
       value_format_name: percent_2
       _kind_hint: measure
-      table_calculation: percent_change
+      table_calculation: comparison
       _type_hint: number
     custom_color_enabled: true
-    show_single_value_title: true
+    show_single_value_title: false
     show_comparison: true
     comparison_type: change
     comparison_reverse_colors: false
@@ -405,6 +415,7 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     single_value_title: Avg Log Loss
+    smart_single_value_size: false
     hidden_pivots: {}
     x_axis_gridlines: false
     y_axis_gridlines: true
@@ -443,153 +454,10 @@
       Training Data URI: most_recent_update.training_data_uri
       Model Status: most_recent_update.model_status
       Model Creation Date: models.creation_timestamp_date
+      Model Algorithm Type: models.model_metric_selector
     row: 4
-    col: 15
-    width: 3
-    height: 4
-  - title: Avg RMSE
-    name: Avg RMSE
-    model: hca_ai_platform
-    explore: models
-    type: single_value
-    fields: [models.dynamic_timeframe, models.average_rmse]
-    filters:
-      models.average_rmse: NOT NULL
-    sorts: [models.dynamic_timeframe desc]
-    limit: 500
-    column_limit: 50
-    dynamic_fields:
-    - category: table_calculation
-      expression: "${models.average_rmse}/offset(${models.average_rmse},1)-1"
-      label: Percent Change
-      value_format:
-      value_format_name: percent_2
-      _kind_hint: measure
-      table_calculation: percent_change
-      _type_hint: number
-    custom_color_enabled: true
-    show_single_value_title: true
-    show_comparison: true
-    comparison_type: change
-    comparison_reverse_colors: false
-    show_comparison_label: false
-    enable_conditional_formatting: false
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    single_value_title: Avg RMSE
-    hidden_pivots: {}
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: false
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    y_axis_scale_mode: linear
-    x_axis_reversed: false
-    y_axis_reversed: false
-    plot_size_by_field: false
-    trellis: ''
-    stacking: ''
-    limit_displayed_rows: false
-    legend_position: center
-    point_style: none
-    show_value_labels: false
-    label_density: 25
-    x_axis_scale: auto
-    y_axis_combined: true
-    ordering: none
-    show_null_labels: false
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    defaults_version: 1
-    hidden_fields: [models.dynamic_timeframe]
-    listen:
-      GCP Project: models.model_gcp_project_id
-      Domain: models.domain
-      PoP Timeframe Selector: models.timeframe_selector
-      Model Name: most_recent_update.model_name
-      Training Data URI: most_recent_update.training_data_uri
-      Model Status: most_recent_update.model_status
-      Model Creation Date: models.creation_timestamp_date
-    row: 4
-    col: 18
-    width: 3
-    height: 4
-  - title: Avg MAE
-    name: Avg MAE
-    model: hca_ai_platform
-    explore: models
-    type: single_value
-    fields: [models.dynamic_timeframe, models.average_mae]
-    filters:
-      models.average_mae: NOT NULL
-    sorts: [models.dynamic_timeframe desc]
-    limit: 500
-    column_limit: 50
-    dynamic_fields:
-    - category: table_calculation
-      expression: "${models.average_mae}/offset(${models.average_mae},1)-1"
-      label: Percent Change
-      value_format:
-      value_format_name: percent_2
-      _kind_hint: measure
-      table_calculation: percent_change
-      _type_hint: number
-    custom_color_enabled: true
-    show_single_value_title: true
-    show_comparison: true
-    comparison_type: change
-    comparison_reverse_colors: false
-    show_comparison_label: false
-    enable_conditional_formatting: false
-    conditional_formatting_include_totals: false
-    conditional_formatting_include_nulls: false
-    single_value_title: Avg MAE
-    hidden_pivots: {}
-    x_axis_gridlines: false
-    y_axis_gridlines: true
-    show_view_names: false
-    show_y_axis_labels: true
-    show_y_axis_ticks: true
-    y_axis_tick_density: default
-    y_axis_tick_density_custom: 5
-    show_x_axis_label: true
-    show_x_axis_ticks: true
-    y_axis_scale_mode: linear
-    x_axis_reversed: false
-    y_axis_reversed: false
-    plot_size_by_field: false
-    trellis: ''
-    stacking: ''
-    limit_displayed_rows: false
-    legend_position: center
-    point_style: none
-    show_value_labels: false
-    label_density: 25
-    x_axis_scale: auto
-    y_axis_combined: true
-    ordering: none
-    show_null_labels: false
-    show_totals_labels: false
-    show_silhouette: false
-    totals_color: "#808080"
-    defaults_version: 1
-    hidden_fields: [models.dynamic_timeframe]
-    listen:
-      GCP Project: models.model_gcp_project_id
-      Domain: models.domain
-      PoP Timeframe Selector: models.timeframe_selector
-      Model Name: most_recent_update.model_name
-      Training Data URI: most_recent_update.training_data_uri
-      Model Status: most_recent_update.model_status
-      Model Creation Date: models.creation_timestamp_date
-    row: 4
-    col: 21
-    width: 3
+    col: 20
+    width: 4
     height: 4
   - title: Other Performance Metrics
     name: Other Performance Metrics
@@ -626,6 +494,7 @@
       Training Data URI: most_recent_update.training_data_uri
       Model Status: most_recent_update.model_status
       Model Creation Date: models.creation_timestamp_date
+      Model Algorithm Type: models.model_metric_selector
     row: 8
     col: 0
     width: 24
@@ -635,10 +504,9 @@
     model: hca_ai_platform
     explore: models
     type: looker_line
-    fields: [models.dynamic_timeframe, models.average_accuracy, models.average_f1,
-      models.average_log_loss, models.average_mae, models.average_precision, models.average_r_squared,
-      models.average_recall, models.average_rmse]
-    sorts: [models.dynamic_timeframe]
+    fields: [models.dynamic_timeframe, models.dynamic_1, models.dynamic_2, models.dynamic_3,
+      models.dynamic_4, models.dynamic_5, models.dynamic_6]
+    sorts: [models.dynamic_1 desc 0]
     limit: 500
     column_limit: 50
     x_axis_gridlines: false
@@ -665,19 +533,19 @@
     y_axis_combined: true
     show_null_points: false
     interpolation: linear
-    y_axes: [{label: '', orientation: left, series: [{axisId: models.average_accuracy,
-            id: models.average_accuracy, name: Average Accuracy}, {axisId: models.average_f1,
-            id: models.average_f1, name: Average F1 Score}, {axisId: models.average_log_loss,
-            id: models.average_log_loss, name: Average Log Loss}, {axisId: models.average_precision,
-            id: models.average_precision, name: Average Precision}, {axisId: models.average_r_squared,
-            id: models.average_r_squared, name: Average R-Squared}, {axisId: models.average_recall,
-            id: models.average_recall, name: Average Recall}], showLabels: true, showValues: true,
-        unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear}]
     x_axis_zoom: true
     y_axis_zoom: true
-    hidden_series: []
+    hide_legend: true
+    hidden_pivots: {}
+    show_row_numbers: true
+    truncate_column_names: false
+    hide_totals: false
+    hide_row_totals: false
+    table_theme: editable
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
     defaults_version: 1
-    hidden_fields: [models.average_mae, models.average_rmse]
     listen:
       GCP Project: models.model_gcp_project_id
       Domain: models.domain
@@ -686,6 +554,7 @@
       Training Data URI: most_recent_update.training_data_uri
       Model Status: most_recent_update.model_status
       Model Creation Date: models.creation_timestamp_date
+      Model Algorithm Type: models.model_metric_selector
     row: 13
     col: 0
     width: 24
@@ -737,6 +606,7 @@
       Training Data URI: most_recent_update.training_data_uri
       Model Status: most_recent_update.model_status
       Model Creation Date: models.creation_timestamp_date
+      Model Algorithm Type: models.model_metric_selector
     row: 27
     col: 0
     width: 24
@@ -787,6 +657,7 @@
       Training Data URI: most_recent_update.training_data_uri
       Model Status: most_recent_update.model_status
       Model Creation Date: models.creation_timestamp_date
+      Model Algorithm Type: models.model_metric_selector
     row: 34
     col: 0
     width: 24
@@ -820,6 +691,7 @@
       Training Data URI: most_recent_update.training_data_uri
       Model Status: most_recent_update.model_status
       Model Creation Date: models.creation_timestamp_date
+      Model Algorithm Type: models.model_metric_selector
     row: 41
     col: 0
     width: 12
@@ -863,6 +735,7 @@
       Training Data URI: most_recent_update.training_data_uri
       Model Status: most_recent_update.model_status
       Model Creation Date: models.creation_timestamp_date
+      Model Algorithm Type: models.model_metric_selector
     row: 41
     col: 12
     width: 12
@@ -927,6 +800,7 @@
       Training Data URI: most_recent_update.training_data_uri
       Model Status: most_recent_update.model_status
       Model Creation Date: models.creation_timestamp_date
+      Model Algorithm Type: models.model_metric_selector
     row: 49
     col: 0
     width: 24
@@ -934,13 +808,14 @@
   - name: " (5)"
     type: text
     title_text: ''
+    subtitle_text: ''
     body_text: |-
       <div style="border-bottom: solid 1px #4285F4;">
       <nav style="font-size: 15px; padding: 5px 10px 0 10px; height: 60px">
-        <a style="padding: 5px 15px; border-top: solid 1px #4285F4; border-left: solid 1px #4285F4; border-right: solid 1px #4285F4; border-radius: 5px 5px 0 0; float: left; line-height: 40px; font-weight: bold; background-color: #eaf1fe;" href="https://hcahealthcarecorpnp.cloud.looker.com/dashboards/hca_ai_platform::example_high_level_dashboard">
+        <a style="padding: 5px 15px; border-top: solid 1px #4285F4; border-left: solid 1px #4285F4; border-right: solid 1px #4285F4; border-radius: 5px 5px 0 0; float: left; line-height: 40px; font-weight: bold; background-color: #eaf1fe;" href="https://hcahealthcarecorpnp.cloud.looker.com/dashboards/hca_ai_platform::high_level_dashboard">
       High Level Dashboard</a>
-        <a style="padding: 5px 15px; border-bottom: solid 1px #4285F4; float: left; line-height: 40px;" href="https://hcahealthcarecorpnp.cloud.looker.com/dashboards/hca_ai_platform::example_deep_dive_dashboard">Deep Dive Dashboard</a>
-        <a style="padding: 5px 15px; border-bottom: solid 1px #4285F4; float: left; line-height: 40px;" href="https://hcahealthcarecorpnp.cloud.looker.com/dashboards/hca_ai_platform::example_comparison_dashboard">Comparison Dashboard</a>
+        <a style="padding: 5px 15px; border-bottom: solid 1px #4285F4; float: left; line-height: 40px;" href="https://hcahealthcarecorpnp.cloud.looker.com/dashboards/hca_ai_platform::deep_dive_dashboard">Deep Dive Dashboard</a>
+        <a style="padding: 5px 15px; border-bottom: solid 1px #4285F4; float: left; line-height: 40px;" href="https://hcahealthcarecorpnp.cloud.looker.com/dashboards/hca_ai_platform::comparison_dashboard">Comparison Dashboard</a>
       </nav>
       </div>
     row: 0
@@ -975,6 +850,19 @@
     explore: models
     listens_to_filters: []
     field: models.creation_timestamp_date
+  - name: Model Algorithm Type
+    title: Model Algorithm Type
+    type: field_filter
+    default_value: classification
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: dropdown_menu
+      display: inline
+    model: hca_ai_platform
+    explore: models
+    listens_to_filters: []
+    field: models.model_metric_selector
   - name: GCP Project
     title: GCP Project
     type: field_filter
