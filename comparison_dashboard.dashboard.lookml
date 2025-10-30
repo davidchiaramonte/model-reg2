@@ -1357,10 +1357,10 @@
     body_text: |-
       <div style="border-bottom: solid 1px #4285F4;">
       <nav style="font-size: 15px; padding: 5px 10px 0 10px; height: 60px">
-        <a style="padding: 5px 15px; border-bottom: solid 1px #4285F4; float: left; line-height: 40px;" href="https://hcahealthcarecorpnp.cloud.looker.com/dashboards/hca_ai_platform::example_dynamic_high_level_dashboard">
+        <a style="padding: 5px 15px; border-bottom: solid 1px #4285F4; float: left; line-height: 40px;" href="https://hcahealthcarecorp.cloud.looker.com/dashboards/hca_ai_platform::high_level_dashboard">
       High Level Dashboard</a>
-        <a style="padding: 5px 15px; border-bottom: solid 1px #4285F4; float: left; line-height: 40px;" href="https://hcahealthcarecorpnp.cloud.looker.com/dashboards/hca_ai_platform::example_dynamic_deep_dive_dashboard">Deep Dive Dashboard</a>
-        <a style="padding: 5px 15px; border-top: solid 1px #4285F4; border-left: solid 1px #4285F4; border-right: solid 1px #4285F4; border-radius: 5px 5px 0 0; float: left; line-height: 40px; font-weight: bold; background-color: #eaf1fe;" href="https://hcahealthcarecorpnp.cloud.looker.com/dashboards/hca_ai_platform::example_dynamic_comparison_dashboard">Comparison Dashboard</a>
+        <a style="padding: 5px 15px; border-bottom: solid 1px #4285F4; float: left; line-height: 40px;" href="https://hcahealthcarecorp.cloud.looker.com/dashboards/hca_ai_platform::deep_dive_dashboard">Deep Dive Dashboard</a>
+        <a style="padding: 5px 15px; border-top: solid 1px #4285F4; border-left: solid 1px #4285F4; border-right: solid 1px #4285F4; border-radius: 5px 5px 0 0; float: left; line-height: 40px; font-weight: bold; background-color: #eaf1fe;" href="https://hcahealthcarecorp.cloud.looker.com/dashboards/hca_ai_platform::comparison_dashboard">Comparison Dashboard</a>
       </nav>
       </div>
     row: 0

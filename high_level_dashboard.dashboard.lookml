@@ -13,7 +13,7 @@
     type: single_value
     fields: [models.dynamic_timeframe, models.dynamic_2]
     filters:
-      models.average_recall: NOT NULL
+      models.dynamic_2: NOT NULL
     sorts: [models.dynamic_timeframe desc]
     limit: 500
     column_limit: 50
@@ -73,9 +73,9 @@
       PoP Timeframe Selector: models.timeframe_selector
       Model Name: most_recent_update.model_name
       Training Data URI: most_recent_update.training_data_uri
-      Model Status: most_recent_update.model_status
       Model Creation Date: models.creation_timestamp_date
       Model Algorithm Type: models.model_metric_selector
+      Model Status: most_recent_update.model_status
     row: 4
     col: 4
     width: 4
@@ -87,8 +87,7 @@
     type: single_value
     fields: [models.dynamic_timeframe, models.dynamic_1]
     filters:
-      models.average_precision: NOT NULL
-      models.model_metric_selector: classification
+      models.dynamic_1: NOT NULL
     sorts: [models.dynamic_timeframe desc]
     limit: 500
     column_limit: 50
@@ -149,9 +148,9 @@
       PoP Timeframe Selector: models.timeframe_selector
       Model Name: most_recent_update.model_name
       Training Data URI: most_recent_update.training_data_uri
-      Model Status: most_recent_update.model_status
       Model Creation Date: models.creation_timestamp_date
       Model Algorithm Type: models.model_metric_selector
+      Model Status: most_recent_update.model_status
     row: 4
     col: 0
     width: 4
@@ -163,7 +162,7 @@
     type: single_value
     fields: [models.dynamic_timeframe, models.dynamic_3]
     filters:
-      models.average_accuracy: NOT NULL
+      models.dynamic_3: NOT NULL
     sorts: [models.dynamic_timeframe desc]
     limit: 500
     column_limit: 50
@@ -223,9 +222,9 @@
       PoP Timeframe Selector: models.timeframe_selector
       Model Name: most_recent_update.model_name
       Training Data URI: most_recent_update.training_data_uri
-      Model Status: most_recent_update.model_status
       Model Creation Date: models.creation_timestamp_date
       Model Algorithm Type: models.model_metric_selector
+      Model Status: most_recent_update.model_status
     row: 4
     col: 8
     width: 4
@@ -236,6 +235,8 @@
     explore: models
     type: single_value
     fields: [models.dynamic_timeframe, models.dynamic_5]
+    filters:
+      models.dynamic_5: NOT NULL
     sorts: [models.dynamic_timeframe desc]
     limit: 500
     column_limit: 50
@@ -295,9 +296,9 @@
       PoP Timeframe Selector: models.timeframe_selector
       Model Name: most_recent_update.model_name
       Training Data URI: most_recent_update.training_data_uri
-      Model Status: most_recent_update.model_status
       Model Creation Date: models.creation_timestamp_date
       Model Algorithm Type: models.model_metric_selector
+      Model Status: most_recent_update.model_status
     row: 4
     col: 16
     width: 4
@@ -309,7 +310,7 @@
     type: single_value
     fields: [models.dynamic_timeframe, models.dynamic_4]
     filters:
-      models.average_f1: NOT NULL
+      models.dynamic_4: NOT NULL
     sorts: [models.dynamic_timeframe desc]
     limit: 500
     column_limit: 50
@@ -369,9 +370,9 @@
       PoP Timeframe Selector: models.timeframe_selector
       Model Name: most_recent_update.model_name
       Training Data URI: most_recent_update.training_data_uri
-      Model Status: most_recent_update.model_status
       Model Creation Date: models.creation_timestamp_date
       Model Algorithm Type: models.model_metric_selector
+      Model Status: most_recent_update.model_status
     row: 4
     col: 12
     width: 4
@@ -392,7 +393,7 @@
     type: single_value
     fields: [models.dynamic_timeframe, models.dynamic_6]
     filters:
-      models.average_log_loss: NOT NULL
+      models.dynamic_6: NOT NULL
     sorts: [models.dynamic_timeframe desc]
     limit: 500
     column_limit: 50
@@ -452,9 +453,9 @@
       PoP Timeframe Selector: models.timeframe_selector
       Model Name: most_recent_update.model_name
       Training Data URI: most_recent_update.training_data_uri
-      Model Status: most_recent_update.model_status
       Model Creation Date: models.creation_timestamp_date
       Model Algorithm Type: models.model_metric_selector
+      Model Status: most_recent_update.model_status
     row: 4
     col: 20
     width: 4
@@ -492,9 +493,9 @@
       PoP Timeframe Selector: models.timeframe_selector
       Model Name: most_recent_update.model_name
       Training Data URI: most_recent_update.training_data_uri
-      Model Status: most_recent_update.model_status
       Model Creation Date: models.creation_timestamp_date
       Model Algorithm Type: models.model_metric_selector
+      Model Status: most_recent_update.model_status
     row: 8
     col: 0
     width: 24
@@ -552,9 +553,9 @@
       PoP Timeframe Selector: models.timeframe_selector
       Model Name: most_recent_update.model_name
       Training Data URI: most_recent_update.training_data_uri
-      Model Status: most_recent_update.model_status
       Model Creation Date: models.creation_timestamp_date
       Model Algorithm Type: models.model_metric_selector
+      Model Status: most_recent_update.model_status
     row: 13
     col: 0
     width: 24
@@ -604,7 +605,6 @@
       PoP Timeframe Selector: models.timeframe_selector
       Model Name: most_recent_update.model_name
       Training Data URI: most_recent_update.training_data_uri
-      Model Status: most_recent_update.model_status
       Model Creation Date: models.creation_timestamp_date
       Model Algorithm Type: models.model_metric_selector
     row: 27
@@ -655,7 +655,6 @@
       PoP Timeframe Selector: models.timeframe_selector
       Model Name: most_recent_update.model_name
       Training Data URI: most_recent_update.training_data_uri
-      Model Status: most_recent_update.model_status
       Model Creation Date: models.creation_timestamp_date
       Model Algorithm Type: models.model_metric_selector
     row: 34
@@ -689,9 +688,9 @@
       PoP Timeframe Selector: models.timeframe_selector
       Model Name: most_recent_update.model_name
       Training Data URI: most_recent_update.training_data_uri
-      Model Status: most_recent_update.model_status
       Model Creation Date: models.creation_timestamp_date
       Model Algorithm Type: models.model_metric_selector
+      Model Status: most_recent_update.model_status
     row: 41
     col: 0
     width: 12
@@ -733,9 +732,9 @@
       PoP Timeframe Selector: models.timeframe_selector
       Model Name: most_recent_update.model_name
       Training Data URI: most_recent_update.training_data_uri
-      Model Status: most_recent_update.model_status
       Model Creation Date: models.creation_timestamp_date
       Model Algorithm Type: models.model_metric_selector
+      Model Status: most_recent_update.model_status
     row: 41
     col: 12
     width: 12
@@ -798,9 +797,9 @@
       PoP Timeframe Selector: models.timeframe_selector
       Model Name: most_recent_update.model_name
       Training Data URI: most_recent_update.training_data_uri
-      Model Status: most_recent_update.model_status
       Model Creation Date: models.creation_timestamp_date
       Model Algorithm Type: models.model_metric_selector
+      Model Status: most_recent_update.model_status
     row: 49
     col: 0
     width: 24
@@ -812,10 +811,10 @@
     body_text: |-
       <div style="border-bottom: solid 1px #4285F4;">
       <nav style="font-size: 15px; padding: 5px 10px 0 10px; height: 60px">
-        <a style="padding: 5px 15px; border-top: solid 1px #4285F4; border-left: solid 1px #4285F4; border-right: solid 1px #4285F4; border-radius: 5px 5px 0 0; float: left; line-height: 40px; font-weight: bold; background-color: #eaf1fe;" href="https://hcahealthcarecorpnp.cloud.looker.com/dashboards/hca_ai_platform::example_dynamic_high_level_dashboard">
+        <a style="padding: 5px 15px; border-top: solid 1px #4285F4; border-left: solid 1px #4285F4; border-right: solid 1px #4285F4; border-radius: 5px 5px 0 0; float: left; line-height: 40px; font-weight: bold; background-color: #eaf1fe;" href="https://hcahealthcarecorp.cloud.looker.com/dashboards/hca_ai_platform::high_level_dashboard">
       High Level Dashboard</a>
-        <a style="padding: 5px 15px; border-bottom: solid 1px #4285F4; float: left; line-height: 40px;" href="https://hcahealthcarecorpnp.cloud.looker.com/dashboards/hca_ai_platform::example_dynamic_deep_dive_dashboard">Deep Dive Dashboard</a>
-        <a style="padding: 5px 15px; border-bottom: solid 1px #4285F4; float: left; line-height: 40px;" href="https://hcahealthcarecorpnp.cloud.looker.com/dashboards/hca_ai_platform::example_dynamic_comparison_dashboard">Comparison Dashboard</a>
+        <a style="padding: 5px 15px; border-bottom: solid 1px #4285F4; float: left; line-height: 40px;" href="https://hcahealthcarecorp.cloud.looker.com/dashboards/hca_ai_platform::deep_dive_dashboard">Deep Dive Dashboard</a>
+        <a style="padding: 5px 15px; border-bottom: solid 1px #4285F4; float: left; line-height: 40px;" href="https://hcahealthcarecorp.cloud.looker.com/dashboards/hca_ai_platform::comparison_dashboard">Comparison Dashboard</a>
       </nav>
       </div>
     row: 0
