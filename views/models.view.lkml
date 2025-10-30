@@ -55,6 +55,10 @@ view: models {
       label: "Classification"
       value: "classification"
     }
+    allowed_value: {
+      label: "XGBoost"
+      value: "xgboost"
+    }
     # allowed_value: {
     #   label: "Logistic Regression"
     #   value: "logistic_regression"
@@ -212,6 +216,7 @@ view: models {
   dimension: accuracy {
     type: number
     sql: ${performance_metrics_summary} ->> 'accuracy' ;;
+    label: "One-Class Accuracy"
   }
 
   dimension: precision {
@@ -260,6 +265,36 @@ view: models {
     sql: ${performance_metrics_summary} ->> 'log_loss' ;;
   }
 
+  dimension: multi_class_accuracy {
+    type: number
+    sql: ${performance_metrics_summary} ->> 'Accuracy Score' ;;
+    label: "Multi-Class Accuracy"
+  }
+
+  dimension: multi_class_macro_ovo {
+    type: number
+    sql: ${performance_metrics_summary} ->> 'ROC AUC Macro (OVO)' ;;
+    label: "ROC AUC Macro (OVO)"
+  }
+
+  dimension: multi_class_macro_ovr {
+    type: number
+    sql: ${performance_metrics_summary} ->> 'ROC AUC Macro (OVR)' ;;
+    label: "ROC AUC Macro (OVR)"
+  }
+
+  dimension: multi_class_weighted_ovo {
+    type: number
+    sql: ${performance_metrics_summary} ->> 'ROC AUC Weighted (OVO)' ;;
+    label: "ROC AUC Weighted (OVO)"
+  }
+
+  dimension: multi_class_weighted_ovr {
+    type: number
+    sql: ${performance_metrics_summary} ->> 'ROC AUC Weighted (OVR)' ;;
+    label: "ROC AUC Weighted (OVR)"
+  }
+
   #========================================================================
 
   # Dynamic Metrics
@@ -277,6 +312,8 @@ view: models {
           ${mse}::FLOAT
          {% elsif model_metric_selector._parameter_value == "classification" %}
           ${accuracy}::FLOAT
+         {% elsif model_metric_selector._parameter_value == "xgboost" %}
+          ${multi_class_accuracy}::FLOAT
          {% else %}
           null
          {% endif %};;
@@ -284,6 +321,8 @@ view: models {
     html: {% if model_metric_selector._parameter_value == "linear_regression" %}
           <a href={{link}}>{{rendered_value}}<h3>Avg MSE</h3></a>
           {% elsif model_metric_selector._parameter_value == "classification" %}
+          <a href={{link}}>{{rendered_value}}<h3>Avg Accuracy</h3></a>
+          {% elsif model_metric_selector._parameter_value == "xgboost" %}
           <a href={{link}}>{{rendered_value}}<h3>Avg Accuracy</h3></a>
           {% else %}
           {{rendered_value}}
@@ -297,6 +336,8 @@ view: models {
           ${rmse}::FLOAT
          {% elsif model_metric_selector._parameter_value == "classification" %}
           ${precision}::FLOAT
+         {% elsif model_metric_selector._parameter_value == "xgboost" %}
+          ${multi_class_macro_ovo}::FLOAT
          {% else %}
           null
          {% endif %};;
@@ -305,6 +346,8 @@ view: models {
           <a href={{link}}>{{rendered_value}}<h3>Avg RMSE</h3></a>
           {% elsif model_metric_selector._parameter_value == "classification" %}
           <a href={{link}}>{{rendered_value}}<h3>Avg Precision</h3></a>
+          {% elsif model_metric_selector._parameter_value == "xgboost" %}
+          <a href={{link}}>{{rendered_value}}<h3>Avg ROC AUC Macro (OVO)</h3></a>
           {% else %}
           {{rendered_value}}
           {% endif %}
@@ -317,6 +360,8 @@ view: models {
           ${mae}::FLOAT
          {% elsif model_metric_selector._parameter_value == "classification" %}
           ${recall}::FLOAT
+         {% elsif model_metric_selector._parameter_value == "xgboost" %}
+          ${multi_class_macro_ovr}::FLOAT
          {% else %}
           null
          {% endif %};;
@@ -325,6 +370,8 @@ view: models {
           <a href={{link}}>{{rendered_value}}<h3>Avg MAE</h3></a>
           {% elsif model_metric_selector._parameter_value == "classification" %}
           <a href={{link}}>{{rendered_value}}<h3>Avg Recall</h3></a>
+          {% elsif model_metric_selector._parameter_value == "xgboost" %}
+          <a href={{link}}>{{rendered_value}}<h3>Avg ROC AUC Macro (OVR)</h3></a>
           {% else %}
           {{rendered_value}}
           {% endif %}
@@ -337,6 +384,8 @@ view: models {
           ${r_squared}::FLOAT
          {% elsif model_metric_selector._parameter_value == "classification" %}
           ${f1_score}::FLOAT
+         {% elsif model_metric_selector._parameter_value == "xgboost" %}
+          ${multi_class_weighted_ovo}::FLOAT
          {% else %}
           null
          {% endif %};;
@@ -345,6 +394,8 @@ view: models {
           <a href={{link}}>{{rendered_value}}<h3>Avg R-Squared</h3></a>
           {% elsif model_metric_selector._parameter_value == "classification" %}
           <a href={{link}}>{{rendered_value}}<h3>Avg F1 Score</h3></a>
+          {% elsif model_metric_selector._parameter_value == "xgboost" %}
+          <a href={{link}}>{{rendered_value}}<h3>Avg ROC AUC Weighted (OVO) Score</h3></a>
           {% else %}
           {{rendered_value}}
           {% endif %}
@@ -357,6 +408,8 @@ view: models {
           0
          {% elsif model_metric_selector._parameter_value == "classification" %}
           ${roc_auc}::FLOAT
+         {% elsif model_metric_selector._parameter_value == "xgboost" %}
+          ${multi_class_weighted_ovr}::FLOAT
          {% else %}
           null
          {% endif %};;
@@ -365,6 +418,8 @@ view: models {
 
           {% elsif model_metric_selector._parameter_value == "classification" %}
           <a href={{link}}>{{rendered_value}}<h3>Avg ROC AUC</h3></a>
+          {% elsif model_metric_selector._parameter_value == "xgboost" %}
+          <a href={{link}}>{{rendered_value}}<h3>Avg ROC AUC Weighted (OVR)</h3></a>
           {% else %}
           {{rendered_value}}
           {% endif %}
@@ -378,13 +433,15 @@ view: models {
          {% elsif model_metric_selector._parameter_value == "classification" %}
           ${log_loss}::FLOAT
          {% else %}
-          null
+          0
          {% endif %};;
     value_format_name: decimal_2
     html: {% if model_metric_selector._parameter_value == "linear_regression" %}
 
           {% elsif model_metric_selector._parameter_value == "classification" %}
           <a href={{link}}>{{rendered_value}}<h3>Avg Log Loss</h3></a>
+          {% elsif model_metric_selector._parameter_value == "xgboost" %}
+
           {% else %}
           {{rendered_value}}
           {% endif %}
@@ -395,10 +452,6 @@ view: models {
   #========================================================================
 
 
-  dimension: promotion_status {
-    type: string
-    sql: ${TABLE}."promotion_status" ;;
-  }
 
   dimension: service_now_ticket_id {
     type: string
@@ -410,10 +463,6 @@ view: models {
     }
   }
 
-  dimension: shadow_deployment_status {
-    type: string
-    sql: ${TABLE}."shadow_deployment_status" ;;
-  }
 
   dimension: trained_by {
     type: string

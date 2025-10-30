@@ -54,6 +54,10 @@ parameter: model_metric_selector {
     label: "Classification"
     value: "classification"
   }
+  allowed_value: {
+    label: "XGBoost"
+    value: "xgboost"
+  }
   # allowed_value: {
   #   label: "Logistic Regression"
   #   value: "logistic_regression"
@@ -93,6 +97,7 @@ dimension: deployment_status {
 dimension: domain {
   type: string
   sql: ${TABLE}."domain" ;;
+  suggest_persist_for: "5 minutes"
 }
 
 dimension: gcs_artifact_path {
@@ -150,6 +155,7 @@ dimension: model_aliases {
 dimension: model_gcp_project_id {
   type: string
   sql: ${TABLE}."model_gcp_project_id" ;;
+  suggest_persist_for: "5 minutes"
 }
 
 dimension: model_labels {
@@ -160,11 +166,13 @@ dimension: model_labels {
 dimension: model_name {
   type: string
   sql: ${TABLE}."model_name" ;;
+  suggest_persist_for: "5 minutes"
 }
 
 dimension: model_semantic_version {
   type: string
   sql: ${TABLE}."model_semantic_version" ;;
+  suggest_persist_for: "5 minutes"
 }
 
 dimension: model_status {
@@ -207,6 +215,7 @@ dimension: recall {
 dimension: accuracy {
   type: number
   sql: ${performance_metrics_summary} ->> 'accuracy' ;;
+  label: "One-Class Accuracy"
 }
 
 dimension: precision {
@@ -255,6 +264,36 @@ dimension: log_loss {
   sql: ${performance_metrics_summary} ->> 'log_loss' ;;
 }
 
+dimension: multi_class_accuracy {
+  type: number
+  sql: ${performance_metrics_summary} ->> 'Accuracy Score' ;;
+  label: "Multi-Class Accuracy"
+}
+
+dimension: multi_class_macro_ovo {
+  type: number
+  sql: ${performance_metrics_summary} ->> 'ROC AUC Macro (OVO)' ;;
+  label: "ROC AUC Macro (OVO)"
+}
+
+dimension: multi_class_macro_ovr {
+  type: number
+  sql: ${performance_metrics_summary} ->> 'ROC AUC Macro (OVR)' ;;
+  label: "ROC AUC Macro (OVR)"
+}
+
+dimension: multi_class_weighted_ovo {
+  type: number
+  sql: ${performance_metrics_summary} ->> 'ROC AUC Weighted (OVO)' ;;
+  label: "ROC AUC Weighted (OVO)"
+}
+
+dimension: multi_class_weighted_ovr {
+  type: number
+  sql: ${performance_metrics_summary} ->> 'ROC AUC Weighted (OVR)' ;;
+  label: "ROC AUC Weighted (OVR)"
+}
+
 #========================================================================
 
 # Dynamic Metrics
@@ -272,6 +311,8 @@ measure: dynamic_1 {
           ${mse}::FLOAT
          {% elsif model_metric_selector._parameter_value == "classification" %}
           ${accuracy}::FLOAT
+         {% elsif model_metric_selector._parameter_value == "xgboost" %}
+          ${multi_class_accuracy}::FLOAT
          {% else %}
           null
          {% endif %};;
@@ -279,6 +320,8 @@ measure: dynamic_1 {
   html: {% if model_metric_selector._parameter_value == "linear_regression" %}
           <a href={{link}}>{{rendered_value}}<h3>Avg MSE</h3></a>
           {% elsif model_metric_selector._parameter_value == "classification" %}
+          <a href={{link}}>{{rendered_value}}<h3>Avg Accuracy</h3></a>
+          {% elsif model_metric_selector._parameter_value == "xgboost" %}
           <a href={{link}}>{{rendered_value}}<h3>Avg Accuracy</h3></a>
           {% else %}
           {{rendered_value}}
@@ -292,6 +335,8 @@ measure: dynamic_2 {
           ${rmse}::FLOAT
          {% elsif model_metric_selector._parameter_value == "classification" %}
           ${precision}::FLOAT
+         {% elsif model_metric_selector._parameter_value == "xgboost" %}
+          ${multi_class_macro_ovo}::FLOAT
          {% else %}
           null
          {% endif %};;
@@ -300,6 +345,8 @@ measure: dynamic_2 {
           <a href={{link}}>{{rendered_value}}<h3>Avg RMSE</h3></a>
           {% elsif model_metric_selector._parameter_value == "classification" %}
           <a href={{link}}>{{rendered_value}}<h3>Avg Precision</h3></a>
+          {% elsif model_metric_selector._parameter_value == "xgboost" %}
+          <a href={{link}}>{{rendered_value}}<h3>Avg ROC AUC Macro (OVO)</h3></a>
           {% else %}
           {{rendered_value}}
           {% endif %}
@@ -312,6 +359,8 @@ measure: dynamic_3 {
           ${mae}::FLOAT
          {% elsif model_metric_selector._parameter_value == "classification" %}
           ${recall}::FLOAT
+         {% elsif model_metric_selector._parameter_value == "xgboost" %}
+          ${multi_class_macro_ovr}::FLOAT
          {% else %}
           null
          {% endif %};;
@@ -320,6 +369,8 @@ measure: dynamic_3 {
           <a href={{link}}>{{rendered_value}}<h3>Avg MAE</h3></a>
           {% elsif model_metric_selector._parameter_value == "classification" %}
           <a href={{link}}>{{rendered_value}}<h3>Avg Recall</h3></a>
+          {% elsif model_metric_selector._parameter_value == "xgboost" %}
+          <a href={{link}}>{{rendered_value}}<h3>Avg ROC AUC Macro (OVR)</h3></a>
           {% else %}
           {{rendered_value}}
           {% endif %}
@@ -332,6 +383,8 @@ measure: dynamic_4 {
           ${r_squared}::FLOAT
          {% elsif model_metric_selector._parameter_value == "classification" %}
           ${f1_score}::FLOAT
+         {% elsif model_metric_selector._parameter_value == "xgboost" %}
+          ${multi_class_weighted_ovo}::FLOAT
          {% else %}
           null
          {% endif %};;
@@ -340,6 +393,8 @@ measure: dynamic_4 {
           <a href={{link}}>{{rendered_value}}<h3>Avg R-Squared</h3></a>
           {% elsif model_metric_selector._parameter_value == "classification" %}
           <a href={{link}}>{{rendered_value}}<h3>Avg F1 Score</h3></a>
+          {% elsif model_metric_selector._parameter_value == "xgboost" %}
+          <a href={{link}}>{{rendered_value}}<h3>Avg ROC AUC Weighted (OVO) Score</h3></a>
           {% else %}
           {{rendered_value}}
           {% endif %}
@@ -352,6 +407,8 @@ measure: dynamic_5 {
           0
          {% elsif model_metric_selector._parameter_value == "classification" %}
           ${roc_auc}::FLOAT
+         {% elsif model_metric_selector._parameter_value == "xgboost" %}
+          ${multi_class_weighted_ovr}::FLOAT
          {% else %}
           null
          {% endif %};;
@@ -360,6 +417,8 @@ measure: dynamic_5 {
 
               {% elsif model_metric_selector._parameter_value == "classification" %}
               <a href={{link}}>{{rendered_value}}<h3>Avg ROC AUC</h3></a>
+              {% elsif model_metric_selector._parameter_value == "xgboost" %}
+              <a href={{link}}>{{rendered_value}}<h3>Avg ROC AUC Weighted (OVR)</h3></a>
               {% else %}
               {{rendered_value}}
               {% endif %}
@@ -373,27 +432,25 @@ measure: dynamic_6 {
          {% elsif model_metric_selector._parameter_value == "classification" %}
           ${log_loss}::FLOAT
          {% else %}
-          null
+          0
          {% endif %};;
   value_format_name: decimal_2
   html: {% if model_metric_selector._parameter_value == "linear_regression" %}
 
               {% elsif model_metric_selector._parameter_value == "classification" %}
               <a href={{link}}>{{rendered_value}}<h3>Avg Log Loss</h3></a>
-              {% else %}
-              {{rendered_value}}
-              {% endif %}
-              ;;
+              {% elsif model_metric_selector._parameter_value == "xgboost" %}
+
+    {% else %}
+    {{rendered_value}}
+    {% endif %}
+    ;;
   drill_fields: [model_name,model_gcp_project_id,performance_metrics_summary]
 }
 
 #========================================================================
 
 
-dimension: promotion_status {
-  type: string
-  sql: ${TABLE}."promotion_status" ;;
-}
 
 dimension: service_now_ticket_id {
   type: string
@@ -405,10 +462,6 @@ dimension: service_now_ticket_id {
   }
 }
 
-dimension: shadow_deployment_status {
-  type: string
-  sql: ${TABLE}."shadow_deployment_status" ;;
-}
 
 dimension: trained_by {
   type: string
@@ -418,6 +471,7 @@ dimension: trained_by {
 dimension: training_data_uri {
   type: string
   sql: ${TABLE}."training_data_uri" ;;
+  suggest_persist_for: "5 minutes"
   html:
     {% if value contains "gs://" %}
     <a href="https://console.cloud.google.com/storage/browser/{{value | remove_first: "gs://"}}">{{rendered_value}}</a>

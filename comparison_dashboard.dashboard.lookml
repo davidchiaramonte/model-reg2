@@ -1357,30 +1357,30 @@
     body_text: |-
       <div style="border-bottom: solid 1px #4285F4;">
       <nav style="font-size: 15px; padding: 5px 10px 0 10px; height: 60px">
-        <a style="padding: 5px 15px; border-bottom: solid 1px #4285F4; float: left; line-height: 40px;" href="https://hcahealthcarecorpnp.cloud.looker.com/dashboards/hca_ai_platform::high_level_dashboard">
+        <a style="padding: 5px 15px; border-bottom: solid 1px #4285F4; float: left; line-height: 40px;" href="https://hcahealthcarecorpnp.cloud.looker.com/dashboards/hca_ai_platform::example_dynamic_high_level_dashboard">
       High Level Dashboard</a>
-        <a style="padding: 5px 15px; border-bottom: solid 1px #4285F4; float: left; line-height: 40px;" href="https://hcahealthcarecorpnp.cloud.looker.com/dashboards/hca_ai_platform::deep_dive_dashboard">Deep Dive Dashboard</a>
-        <a style="padding: 5px 15px; border-top: solid 1px #4285F4; border-left: solid 1px #4285F4; border-right: solid 1px #4285F4; border-radius: 5px 5px 0 0; float: left; line-height: 40px; font-weight: bold; background-color: #eaf1fe;" href="https://hcahealthcarecorpnp.cloud.looker.com/dashboards/hca_ai_platform::comparison_dashboard">Comparison Dashboard</a>
+        <a style="padding: 5px 15px; border-bottom: solid 1px #4285F4; float: left; line-height: 40px;" href="https://hcahealthcarecorpnp.cloud.looker.com/dashboards/hca_ai_platform::example_dynamic_deep_dive_dashboard">Deep Dive Dashboard</a>
+        <a style="padding: 5px 15px; border-top: solid 1px #4285F4; border-left: solid 1px #4285F4; border-right: solid 1px #4285F4; border-radius: 5px 5px 0 0; float: left; line-height: 40px; font-weight: bold; background-color: #eaf1fe;" href="https://hcahealthcarecorpnp.cloud.looker.com/dashboards/hca_ai_platform::example_dynamic_comparison_dashboard">Comparison Dashboard</a>
       </nav>
       </div>
     row: 0
     col: 0
     width: 24
     height: 2
-  - title: Shadow Deployments
-    name: Shadow Deployments
+  - title: Challenger Deployments
+    name: Challenger Deployments
     model: hca_ai_platform
     explore: models
     type: looker_grid
     fields: [most_recent_update.model_name, most_recent_update.model_gcp_project_id,
-      most_recent_update.shadow_deployment_status, most_recent_update.performance_metrics_summary]
+      most_recent_update.performance_metrics_summary, most_recent_update.deployment_status]
     filters:
-      most_recent_update.shadow_deployment_status: "-NULL"
       models.model_gcp_project_id: ''
       most_recent_update.model_name: ''
       models.domain: ''
       most_recent_update.training_data_uri: ''
       most_recent_update.model_status: ''
+      most_recent_update.publish_status: challenger
     sorts: [most_recent_update.model_name]
     limit: 500
     column_limit: 50
@@ -1410,20 +1410,20 @@
     col: 0
     width: 12
     height: 6
-  - title: Shadow Deployments
-    name: Shadow Deployments (2)
+  - title: Challenger Deployments
+    name: Challenger Deployments (2)
     model: hca_ai_platform
     explore: models
     type: looker_grid
     fields: [most_recent_update.model_name, most_recent_update.model_gcp_project_id,
-      most_recent_update.shadow_deployment_status, most_recent_update.performance_metrics_summary]
+      most_recent_update.performance_metrics_summary, most_recent_update.deployment_status]
     filters:
-      most_recent_update.shadow_deployment_status: "-NULL"
       models.model_gcp_project_id: ''
       most_recent_update.model_name: ''
       models.domain: ''
       most_recent_update.training_data_uri: ''
       most_recent_update.model_status: ''
+      most_recent_update.publish_status: challenger
     sorts: [most_recent_update.model_name]
     limit: 500
     column_limit: 50
@@ -1461,12 +1461,11 @@
     fields: [most_recent_update.model_name, most_recent_update.model_gcp_project_id,
       most_recent_update.model_semantic_version, most_recent_update.performance_metrics_summary]
     filters:
-      most_recent_update.promotion_status: production
       models.model_gcp_project_id: ''
       most_recent_update.model_name: ''
       models.domain: ''
       most_recent_update.training_data_uri: ''
-      most_recent_update.model_status: ''
+      most_recent_update.model_status: production
     sorts: [most_recent_update.model_name]
     limit: 500
     column_limit: 50
@@ -1504,12 +1503,11 @@
     fields: [most_recent_update.model_name, most_recent_update.model_gcp_project_id,
       most_recent_update.model_semantic_version, most_recent_update.performance_metrics_summary]
     filters:
-      most_recent_update.promotion_status: production
       models.model_gcp_project_id: ''
       most_recent_update.model_name: ''
       models.domain: ''
       most_recent_update.training_data_uri: ''
-      most_recent_update.model_status: ''
+      most_recent_update.model_status: production
     sorts: [most_recent_update.model_name]
     limit: 500
     column_limit: 50
